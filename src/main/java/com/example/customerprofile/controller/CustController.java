@@ -13,26 +13,26 @@ public class CustController {
     @Autowired
     private CustomerRepository custRepository;
 
-    @RequestMapping(value = "/error", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public String errorPage() {
-        return "no page found, incorrect path";
+        return "Welcome to Sample CustomerApp on Openshift cluster";
     }
 
-    @RequestMapping(path = "/customers", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/list", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Iterable<Customer> getAllUsers() {
         System.out.println("Inside path get customers");
         return custRepository.findAll();
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody String addNewUser (@RequestBody String name) {
+    @RequestMapping(value = "/add", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody String addNewUser (@RequestParam String name) {
         System.out.println("Inside path add");
 
         Customer cst = new Customer();
         cst.setName(name);
         custRepository.save(cst);
-        return "Saved Customer" + name + " into table customer" ;
+        return "Saved Customer: " + name + " into table customer" ;
     }
 
 
