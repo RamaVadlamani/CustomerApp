@@ -25,8 +25,8 @@ public class CustController {
         return custRepository.findAll();
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody String addNewUser (@RequestParam String name) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody String addNewUser (@RequestBody String name) {
         System.out.println("Inside path add");
 
         Customer cst = new Customer();
